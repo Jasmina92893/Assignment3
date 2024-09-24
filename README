@@ -1,0 +1,79 @@
+# Personal Account Management System
+
+This repository contains a Java-based solution for managing personal bank accounts through the `PersonalAccount` class. The system allows users to create and manage individual accounts, perform transactions like deposits and withdrawals, maintain a transaction history, and retrieve balance and account details. The project is built for educational purposes to demonstrate object-oriented programming concepts in Java, such as classes, enums, and encapsulation.
+
+## Project Structure
+
+### 1. **TransactionType Enum**:
+   The `TransactionType` enum defines two constants that represent the types of financial transactions a personal account can handle:
+   - **DEPOSIT**: Used when money is added to the account.
+   - **WITHDRAWAL**: Used when money is removed from the account.
+
+   This enum helps to clearly define the nature of each transaction, making it easy to categorize deposits and withdrawals.
+
+### 2. **Amount Class**:
+   The `Amount` class is designed to store details about individual transactions. Each transaction is recorded with two main fields:
+   - **amount** (double): The monetary value of the transaction (either deposit or withdrawal).
+   - **transactionType** (TransactionType): The type of the transaction, which is either DEPOSIT or WITHDRAWAL.
+   
+   The `Amount` class plays a key role in organizing transaction data, making it easier to log and retrieve transaction history for each account.
+
+### 3. **PersonalAccount Class**:
+   The `PersonalAccount` class represents the core of the system, encapsulating the attributes and behaviors related to a personal bank account. The following fields are defined:
+   - **accountNumber** (int): A unique number assigned to each account to differentiate it from others.
+   - **accountHolder** (String): The name of the person or entity that holds the account.
+   - **balance** (double): The current amount of money available in the account, starting at 0.0 by default.
+   - **transactions** (List\<Amount>): A list that stores all the financial transactions (deposits and withdrawals) made by the account holder.
+
+   #### Key Methods of the `PersonalAccount` Class:
+
+   - **Constructor**:
+     - `PersonalAccount(int accountNumber, String accountHolder)`: Initializes a new account by assigning the provided account number and holder name. The initial balance is set to zero, and the transaction history starts empty.
+   
+   - **`deposit(double amount)`**:
+     - This method allows the account holder to add money to their account. It accepts a double value representing the deposit amount. Each deposit is recorded as an `Amount` object with the `DEPOSIT` transaction type, which is added to the list of transactions. The account balance is updated by increasing it by the deposited amount.
+   
+   - **`withdraw(double amount)`**:
+     - This method allows the account holder to withdraw funds from their account. It accepts a double value representing the withdrawal amount. Before processing the withdrawal, the method checks if the account balance is sufficient to cover the requested amount. If so, it creates an `Amount` object with the `WITHDRAWAL` type, adds it to the transaction history, and reduces the balance by the withdrawn amount. If the balance is insufficient, no transaction is recorded, and the withdrawal is denied.
+   
+   - **`getBalance()`**:
+     - This method returns the current balance of the account, allowing the account holder to see how much money they have available at any given time.
+   
+   - **`getAccountNumber()`**:
+     - This method returns the unique account number associated with the account. It is useful for identifying different accounts within a system that may manage multiple users.
+   
+   - **`getAccountHolder()`**:
+     - This method returns the name of the account holder. It allows external entities or other components of the system to access the account holder's information.
+   
+   - **`printTransactionHistory()`**:
+     - This method provides a detailed report of all the transactions performed on the account. It loops through the list of `Amount` objects, displaying both the type (DEPOSIT or WITHDRAWAL) and the amount for each transaction. This history helps the account holder review their financial activities and track deposits and withdrawals over time.
+
+## How It Works
+
+The `PersonalAccount` class manages all financial interactions for a given account holder. Upon account creation, a unique account number and holder name are assigned, and the initial balance is set to zero. The user can then deposit and withdraw funds, with each transaction being logged in the account’s transaction history.
+
+The `deposit()` and `withdraw()` methods ensure that every change to the account’s balance is accurately recorded. The balance is updated with each deposit or withdrawal, while the `printTransactionHistory()` method provides a comprehensive overview of all past transactions.
+
+By using the `getBalance()` method, the account holder can check their current balance at any time. The `getAccountNumber()` and `getAccountHolder()` methods allow easy access to account details, enabling integration with other banking systems.
+
+## UML Diagram
+
+A UML diagram is provided with the project to represent the relationships between the various classes:
+- **PersonalAccount** uses the **Amount** class to log transactions, which are categorized by the **TransactionType** enum.
+
+The UML diagram visualizes these relationships, showing how the classes interact to manage account data and transaction history.
+
+## Key Features
+- **Encapsulation**: All account details and transactions are encapsulated within the `PersonalAccount` class, providing a clear structure and organization.
+- **Transaction History**: Each account stores a list of transactions, making it easy to track financial movements.
+- **Balance Management**: Deposits and withdrawals are processed efficiently with balance verification to ensure that withdrawals don't exceed the available funds.
+- **User Information**: Easy access to account details (number, holder name, and balance) through simple getter methods.
+
+## Testing
+This project includes test scenarios to verify the correctness of the `PersonalAccount` class under various conditions:
+- Depositing and withdrawing different amounts.
+- Handling cases where withdrawals exceed the account balance.
+- Ensuring transaction history is recorded accurately.
+- Verifying the balance is correctly updated after each operation.
+
+Each test ensures that the system operates reliably in different real-world scenarios, maintaining data integrity across multiple transactions.
